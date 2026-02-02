@@ -19,9 +19,16 @@
   </div>
 
   <header class="hero">
-    <video class="hero-video" autoplay muted loop playsinline poster="HERO_POSTER_URL" aria-hidden="true">
-      <source src="https://res.cloudinary.com/dd8pjjxsm/video/upload/v1770019435/From_KlickPin_CF_Pin_on_Portfolio_g9dtlr.mp4" type="video/mp4" />
-    </video>
+    <video
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      data-asset="heroBgVideoUrl"
+      data-poster="heroPosterUrl"
+      aria-hidden="true"
+    ></video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="eyebrow">Island Force Renewables</p>
@@ -87,29 +94,55 @@
     <section class="section education" aria-labelledby="education-title">
       <div class="container">
         <h2 id="education-title" class="section-title reveal">Solar isn’t magic. It’s math.</h2>
-        <ul class="icon-list">
-          <li class="reveal">
-            <span class="icon">☀️</span>
-            Panels generate power
-          </li>
-          <li class="reveal">
-            <span class="icon">⚡</span>
-            Inverter converts it
-          </li>
-          <li class="reveal">
-            <span class="icon">🔋</span>
-            Batteries store it
-          </li>
-          <li class="reveal">
-            <span class="icon">📈</span>
-            Monitoring shows performance
-          </li>
-          <li class="reveal">
-            <span class="icon">🔌</span>
-            Utility stays as backup
-          </li>
-        </ul>
-        <p class="humor reveal">Think of it as a hybrid system — solar first, backup when needed.</p>
+        <div class="education-grid">
+          <div class="diagram-card reveal">
+            <h3>How your system flows</h3>
+            <ol class="diagram-steps">
+              <li class="diagram-step">
+                <span class="diagram-icon">☀️</span>
+                <span>Panels capture sunlight</span>
+              </li>
+              <li class="diagram-step">
+                <span class="diagram-icon">⚡</span>
+                <span>Inverter turns it into usable power</span>
+              </li>
+              <li class="diagram-step">
+                <span class="diagram-icon">🔋</span>
+                <span>Batteries store extra energy</span>
+              </li>
+              <li class="diagram-step">
+                <span class="diagram-icon">📈</span>
+                <span>Monitoring keeps you in control</span>
+              </li>
+              <li class="diagram-step">
+                <span class="diagram-icon">🔌</span>
+                <span>Grid stays as silent backup</span>
+              </li>
+            </ol>
+          </div>
+          <div class="education-media">
+            <div class="media-card reveal">
+              <div class="media-frame">
+                <video
+                  class="system__video"
+                  autoplay
+                  muted
+                  playsinline
+                  data-asset="solarExplainerVideoUrl"
+                  data-poster="solarExplainerPosterUrl"
+                ></video>
+                <button class="audio-toggle" type="button" data-audio-toggle aria-pressed="false">
+                  Sound off
+                </button>
+                <span class="sound-chip" aria-hidden="true">Sound on</span>
+              </div>
+            </div>
+            <div class="education-copy">
+              <p class="reveal">Think of it as a hybrid system — solar first, backup when needed.</p>
+              <p class="reveal">We design the flow so your home uses sun power first, stores what it can, and only leans on the grid when it makes sense.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
