@@ -29,6 +29,26 @@ Asset URLs are centralized in `public/js/app.js` within the `ASSETS` object. Upd
 | `projectsStripVideoUrl` | Projects header strip video | `public/assets/video/projects.mp4` |
 | `projectsStripPosterUrl` | Projects header strip poster image | `public/assets/img/projects-poster.jpg` |
 
+Asset constants (set in public/js/app.js)
+
+ASSETS.logoUrl → top-left logo
+
+ASSETS.heroBgVideoUrl → hero background video
+
+ASSETS.heroPosterUrl → hero fallback poster
+
+ASSETS.financingImageUrl → financing section image panel (Block 2)
+
+ASSETS.solarExplainerVideoUrl → inline explainer video in “Solar isn’t magic”
+
+ASSETS.solarExplainerPosterUrl → poster for explainer video (optional)
+
+ASSETS.whyGoSolarImageUrl → “Why go solar” image block
+
+ASSETS.projectsStripVideoUrl → projects section header background strip
+
+ASSETS.projectsStripPosterUrl → projects strip fallback poster
+
 ## Environment variables
 
 Create a `.env` file locally (see `.env.example`) and configure:

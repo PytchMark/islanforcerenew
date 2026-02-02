@@ -10,7 +10,7 @@
     <div class="grain"></div>
     <header class="nav">
       <div class="nav__brand">
-        <img class="nav__logo" data-asset="logoUrl" alt="Island Force Renewables logo" />
+        <img data-asset="logo" class="nav-logo" src="" alt="Island Force Renewables" />
         <div>
           <p class="nav__title">Island Force Renewables</p>
           <p class="nav__subtitle">Solar Power Movement</p>
@@ -33,9 +33,9 @@
           muted
           loop
           playsinline
-          data-asset="heroBgVideoUrl"
-          data-poster="heroPosterUrl"
+          data-asset="hero-video"
         ></video>
+        <img data-asset="hero-poster" class="hero-poster" src="" alt="" aria-hidden="true" />
         <div class="hero__overlay"></div>
         <div class="hero__content">
           <div class="hero__glass reveal">
@@ -73,7 +73,7 @@
         <div class="container">
           <div class="financing__grid">
             <div class="financing__media card reveal">
-              <img data-asset="financingImageUrl" alt="Home solar financing overview" />
+              <img data-asset="financing-image" class="media-card-img" src="" alt="Home solar financing overview" />
             </div>
             <div class="financing__text reveal">
               <p class="eyebrow">Financing Reframe</p>
@@ -121,7 +121,7 @@
               </div>
             </div>
             <div class="comparison__media card reveal">
-              <img data-asset="whyGoSolarImageUrl" alt="Solar-ready home" />
+              <img data-asset="why-go-solar" class="media-card-img" src="" alt="Solar-ready home" />
               <p class="comparison__caption">Own the energy journey instead of renting it every month.</p>
             </div>
           </div>
@@ -162,28 +162,22 @@
           </div>
           <div class="system__content reveal">
             <div class="media-card">
-              <div class="media-card__video">
-                <video
-                  class="system__video"
-                  autoplay
-                  muted
-                  loop
-                  playsinline
-                  data-asset="solarExplainerVideoUrl"
-                  data-poster="solarExplainerPosterUrl"
-                ></video>
-                <button class="audio-toggle" data-audio-toggle type="button" aria-pressed="false">
-                  Sound off
-                </button>
-                <span class="sound-chip" aria-hidden="true">Sound on</span>
+              <div class="media-card-top">
+                <span class="media-badge">Explainer</span>
+                <button class="pill-btn" data-action="toggle-explainer-audio" aria-pressed="false">Unmute</button>
               </div>
-              <div class="media-card__copy">
-                <h3>See the system working together.</h3>
-                <p>
-                  Panels, inverter, storage, and monitoring are tuned as one ecosystem. We show you how power moves so you can
-                  feel confident every day.
-                </p>
-              </div>
+
+              <div class="sound-chip" data-ui="sound-chip">Sound on</div>
+
+              <video
+                data-asset="solar-explainer-video"
+                playsinline
+                muted
+                preload="metadata"
+              ></video>
+            </div>
+            <div class="system__copy">
+              <p>Solar works like a hybrid system: your panels power the home first, batteries store extra energy, and the grid stays as backup when needed.</p>
             </div>
           </div>
         </div>
@@ -194,7 +188,7 @@
           <h2 class="section-title reveal">Estimate your savings potential.</h2>
           <div class="savings__grid">
             <div class="card savings__media reveal">
-              <img data-asset="savingsSideImageUrl" alt="Solar savings illustration" />
+              <img data-asset="savings-image" class="media-card-img" src="" alt="Solar savings illustration" />
             </div>
             <div class="card savings__controls reveal">
               <label for="bill-range">Monthly bill (JMD)</label>
@@ -246,7 +240,8 @@
 
       <section class="projects" id="projects">
         <div class="projects__video">
-          <video autoplay muted loop playsinline data-asset="projectsStripVideoUrl" data-poster="projectsStripPosterUrl"></video>
+          <video autoplay muted loop playsinline data-asset="projects-strip-video"></video>
+          <img data-asset="projects-strip-poster" class="projects-strip-poster" src="" alt="" aria-hidden="true" />
           <div class="section-overlay"></div>
           <div class="container projects__header">
             <h2>Solar installs across the island.</h2>
@@ -304,7 +299,7 @@
           <h2 class="section-title reveal">A premium experience from audit to activation.</h2>
           <div class="process__layout">
             <div class="process__media card reveal">
-              <img data-asset="processImageUrl" alt="Solar installation process" />
+              <img data-asset="process-image" class="media-card-img" src="" alt="Solar installation process" />
             </div>
             <div class="process__grid reveal">
               <div class="card">
