@@ -10,7 +10,7 @@
     <div class="grain"></div>
     <header class="nav">
       <div class="nav__brand">
-        <span class="nav__logo">IFR</span>
+        <img class="nav__logo" data-asset="logoUrl" alt="Island Force Renewables logo" />
         <div>
           <p class="nav__title">Island Force Renewables</p>
           <p class="nav__subtitle">Solar Power Movement</p>
@@ -22,12 +22,20 @@
         <a href="#projects">Projects</a>
         <a href="#process">Process</a>
       </nav>
-      <a class="btn btn--primary" data-wa="hero-primary" href="#">Go Solar Now</a>
+      <a class="btn btn--primary nav__cta" data-wa="hero-primary" href="#">Go Solar Now</a>
     </header>
 
     <main>
       <section class="hero" id="top">
-        <video class="hero__video" autoplay muted loop playsinline data-video="hero" poster="/assets/img/hero-poster.svg"></video>
+        <video
+          class="hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          data-asset="heroBgVideoUrl"
+          data-poster="heroPosterUrl"
+        ></video>
         <div class="hero__overlay"></div>
         <div class="hero__content">
           <div class="hero__glass reveal">
@@ -62,23 +70,26 @@
       </section>
 
       <section class="financing" id="financing">
-         <video class="section-video" autoplay muted loop playsinline data-video="financing" poster="/assets/img/financing-poster.svg"></video>
-        <div class="section-overlay"></div>
         <div class="container">
           <div class="financing__grid">
+            <div class="financing__media card reveal">
+              <img data-asset="financingImageUrl" alt="Home solar financing overview" />
+            </div>
             <div class="financing__text reveal">
               <p class="eyebrow">Financing Reframe</p>
               <h2>Let your bill build equity.</h2>
               <p class="typing" id="typing-line"></p>
-              <p class="lock-line" id="lock-line">Solar doesn’t eliminate monthly payments. It changes what those payments do for you.</p>
+              <p class="lock-line" id="lock-line">
+                Solar doesn’t eliminate monthly payments. It changes what those payments do for you.
+              </p>
               <button class="btn btn--primary" data-modal-open="education">See the Difference</button>
             </div>
             <div class="financing__cards reveal">
-              <div class="card glass">
+              <div class="card">
                 <h3>Same monthly outflow</h3>
                 <p>Replace rent-like utility payments with ownership building energy assets.</p>
               </div>
-              <div class="card glass">
+              <div class="card">
                 <h3>Protected from rate spikes</h3>
                 <p>Lock in predictable solar payments while utility prices rise.</p>
               </div>
@@ -90,22 +101,28 @@
       <section class="comparison" id="comparison">
         <div class="container">
           <h2 class="section-title reveal">Solar vs. Utility Renting</h2>
-          <div class="comparison__grid reveal">
-            <div class="card compare-card">
-              <h3>Renting Power</h3>
-              <ul>
-                <li>Payments reset every month</li>
-                <li>No equity or asset value</li>
-                <li>Exposed to utility rate hikes</li>
-              </ul>
+          <div class="comparison__layout">
+            <div class="comparison__grid reveal">
+              <div class="card compare-card">
+                <h3>Renting Power</h3>
+                <ul>
+                  <li>Payments reset every month</li>
+                  <li>No equity or asset value</li>
+                  <li>Exposed to utility rate hikes</li>
+                </ul>
+              </div>
+              <div class="card compare-card highlight">
+                <h3>Solar Ownership</h3>
+                <ul>
+                  <li>Monthly payments build asset value</li>
+                  <li>Backup-ready resilience</li>
+                  <li>Designed for island conditions</li>
+                </ul>
+              </div>
             </div>
-            <div class="card compare-card highlight">
-              <h3>Solar Ownership</h3>
-              <ul>
-                <li>Monthly payments build asset value</li>
-                <li>Backup-ready resilience</li>
-                <li>Designed for island conditions</li>
-              </ul>
+            <div class="comparison__media card reveal">
+              <img data-asset="whyGoSolarImageUrl" alt="Solar-ready home" />
+              <p class="comparison__caption">Own the energy journey instead of renting it every month.</p>
             </div>
           </div>
         </div>
@@ -113,36 +130,59 @@
 
       <section class="system" id="system">
         <div class="container system__grid">
-          <div class="system__diagram reveal">
+          <div class="system__diagram card reveal">
             <p class="eyebrow">Solar isn’t magic</p>
+            <h2>Solar isn’t magic. It’s math.</h2>
             <div class="diagram">
-              <div class="diagram__block" data-step="0">Panels</div>
+              <div class="diagram__step">
+                <span class="diagram__icon">☀️</span>
+                <span>Panels capture sunlight</span>
+              </div>
               <div class="diagram__arrow"></div>
-              <div class="diagram__block" data-step="1">Inverter</div>
+              <div class="diagram__step">
+                <span class="diagram__icon">⚡</span>
+                <span>Inverter converts energy</span>
+              </div>
               <div class="diagram__arrow"></div>
-              <div class="diagram__block" data-step="2">Battery</div>
+              <div class="diagram__step">
+                <span class="diagram__icon">🔋</span>
+                <span>Batteries store power</span>
+              </div>
               <div class="diagram__arrow"></div>
-              <div class="diagram__block" data-step="3">Monitoring</div>
+              <div class="diagram__step">
+                <span class="diagram__icon">📈</span>
+                <span>Monitoring tracks flow</span>
+              </div>
               <div class="diagram__arrow"></div>
-              <div class="diagram__block" data-step="4">Utility Backup</div>
+              <div class="diagram__step">
+                <span class="diagram__icon">🔌</span>
+                <span>Utility stays as backup</span>
+              </div>
             </div>
           </div>
           <div class="system__content reveal">
-            <h2>Understand your energy ecosystem.</h2>
-            <p>
-              We design every system so the panels, inverter, storage, and monitoring work together. You always know where power
-              is flowing.
-            </p>
-            <div class="accordion">
-              <button class="accordion__trigger" aria-expanded="false">What happens during a blackout?</button>
-              <div class="accordion__content">
-                <p>Your battery and inverter keep essential circuits running, and we tune it to your priority loads.</p>
+            <div class="media-card">
+              <div class="media-card__video">
+                <video
+                  class="system__video"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  data-asset="solarExplainerVideoUrl"
+                  data-poster="solarExplainerPosterUrl"
+                ></video>
+                <button class="audio-toggle" data-audio-toggle type="button" aria-pressed="false">
+                  Sound off
+                </button>
+                <span class="sound-chip" aria-hidden="true">Sound on</span>
               </div>
-            </div>
-            <div class="accordion">
-              <button class="accordion__trigger" aria-expanded="false">Can I expand later?</button>
-              <div class="accordion__content">
-                <p>Yes. We design for growth so you can add storage or panels without a full rebuild.</p>
+              <div class="media-card__copy">
+                <h3>See the system working together.</h3>
+                <p>
+                  Panels, inverter, storage, and monitoring are tuned as one ecosystem. We show you how power moves so you can
+                  feel confident every day.
+                </p>
               </div>
             </div>
           </div>
@@ -153,6 +193,9 @@
         <div class="container">
           <h2 class="section-title reveal">Estimate your savings potential.</h2>
           <div class="savings__grid">
+            <div class="card savings__media reveal">
+              <img data-asset="savingsSideImageUrl" alt="Solar savings illustration" />
+            </div>
             <div class="card savings__controls reveal">
               <label for="bill-range">Monthly bill (JMD)</label>
               <input id="bill-range" type="range" min="10000" max="200000" step="5000" value="45000" />
@@ -161,7 +204,13 @@
                 <button class="toggle__btn active" data-plan="residential">Residential</button>
                 <button class="toggle__btn" data-plan="commercial">Commercial</button>
               </div>
-              <a class="btn btn--primary" data-wa="savings-cta" href="#">Send My Bill on WhatsApp</a>
+              <p class="savings__summary" id="savings-summary"></p>
+              <a class="btn btn--primary" data-wa="savings-cta" href="#">Send My Bill (WhatsApp)</a>
+              <div class="micro-steps">
+                <span>Send bill photo</span>
+                <span>We size system</span>
+                <span>Options in 48h</span>
+              </div>
             </div>
             <div class="card savings__result reveal">
               <h3>Estimated impact</h3>
@@ -197,11 +246,11 @@
 
       <section class="projects" id="projects">
         <div class="projects__video">
-          <video autoplay muted loop playsinline data-video="projects" poster="/assets/img/projects-poster.svg"></video>
+          <video autoplay muted loop playsinline data-asset="projectsStripVideoUrl" data-poster="projectsStripPosterUrl"></video>
           <div class="section-overlay"></div>
           <div class="container projects__header">
             <h2>Solar installs across the island.</h2>
-            <p>Every photo is pulled from our live Cloudinary portfolio.</p>
+            <p>Every photo is pulled from our latest installs.</p>
           </div>
         </div>
         <div class="container projects__content">
@@ -253,22 +302,27 @@
       <section class="process" id="process">
         <div class="container">
           <h2 class="section-title reveal">A premium experience from audit to activation.</h2>
-          <div class="process__grid reveal">
-            <div class="card">
-              <h3>1. Discovery call</h3>
-              <p>We review your bill, goals, and property to align the right system size.</p>
+          <div class="process__layout">
+            <div class="process__media card reveal">
+              <img data-asset="processImageUrl" alt="Solar installation process" />
             </div>
-            <div class="card">
-              <h3>2. Site assessment</h3>
-              <p>Our engineers evaluate roof structure, shading, and grid connection details.</p>
-            </div>
-            <div class="card">
-              <h3>3. Design + finance</h3>
-              <p>We deliver a proposal with financing pathways and projected savings.</p>
-            </div>
-            <div class="card">
-              <h3>4. Install + optimize</h3>
-              <p>Certified installers commission your system and tune monitoring for peak output.</p>
+            <div class="process__grid reveal">
+              <div class="card">
+                <h3>1. Discovery call</h3>
+                <p>We review your bill, goals, and property to align the right system size.</p>
+              </div>
+              <div class="card">
+                <h3>2. Site assessment</h3>
+                <p>Our engineers evaluate roof structure, shading, and grid connection details.</p>
+              </div>
+              <div class="card">
+                <h3>3. Design + finance</h3>
+                <p>We deliver a proposal with financing pathways and projected savings.</p>
+              </div>
+              <div class="card">
+                <h3>4. Install + optimize</h3>
+                <p>Certified installers commission your system and tune monitoring for peak output.</p>
+              </div>
             </div>
           </div>
         </div>
