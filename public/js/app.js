@@ -1,19 +1,116 @@
+// =====================
+// ASSETS (single source of truth)
+// =====================
 const ASSETS = {
   logoUrl:
     "https://res.cloudinary.com/dd8pjjxsm/image/upload/v1770020328/ChatGPT_Image_Jan_20_2026_11_48_57_AM_ibqw3k.png",
-  heroBgVideoUrl: "/assets/video/hero.mp4",
-  heroPosterUrl: "/assets/img/hero-poster.svg",
-  financingImageUrl: "/assets/img/financing-poster.svg",
+
+  // Background videos (Cloud Run env vars preferred; fallback to placeholders)
+  heroBgVideoUrl: window.__ENV__?.HERO_VIDEO_URL || "",
+  heroPosterUrl: window.__ENV__?.HERO_POSTER_URL || "",
+
+  projectsStripVideoUrl: window.__ENV__?.PROJECTS_VIDEO_URL || "",
+  projectsStripPosterUrl: window.__ENV__?.PROJECTS_POSTER_URL || "",
+
+  // Block 2 should NOT be video background (per your rule)
+  financingImageUrl: window.__ENV__?.FINANCING_IMAGE_URL || "",
+
+  // Inline explainer video (with voice over)
   solarExplainerVideoUrl:
     "https://res.cloudinary.com/dd8pjjxsm/video/upload/v1770020838/From_KlickPin_CF_Operation_process_of_energy-saving_solar_energy_system_batteryenergystoragesystem_Video___Solar_energy_projects_Solar_energy_system_Solar_power_calculator_vwxk7s.mp4",
-  solarExplainerPosterUrl: "/assets/img/hero-poster.svg",
+  solarExplainerPosterUrl: window.__ENV__?.SOLAR_EXPLAINER_POSTER_URL || "",
+
+  // “Why go solar” image
   whyGoSolarImageUrl:
     "https://res.cloudinary.com/dd8pjjxsm/image/upload/v1770020328/ChatGPT_Image_Jan_20_2026_09_58_37_AM_clnnrw.png",
-  savingsSideImageUrl: "/assets/img/hero-poster.svg",
-  processImageUrl: "/assets/img/projects-poster.svg",
-  projectsStripVideoUrl: "/assets/video/projects.mp4",
-  projectsStripPosterUrl: "/assets/img/projects-poster.svg",
+
+  // Optional alternation images for other blocks
+  savingsSideImageUrl: window.__ENV__?.SAVINGS_SIDE_IMAGE_URL || "",
+  processImageUrl: window.__ENV__?.PROCESS_IMAGE_URL || "",
 };
+
+function bindAssets() {
+  // Logo
+  const logo = document.querySelector('[data-asset="logo"]');
+  if (logo && ASSETS.logoUrl) {
+    logo.src = ASSETS.logoUrl;
+    logo.alt = "Island Force Renewables";
+    logo.loading = "eager";
+    logo.decoding = "async";
+  }
+
+  // Hero background video
+  const heroVideo = document.querySelector('[data-asset="hero-video"]');
+  const heroPoster = document.querySelector('[data-asset="hero-poster"]');
+  if (heroVideo && ASSETS.heroBgVideoUrl) heroVideo.src = ASSETS.heroBgVideoUrl;
+  if (heroPoster && ASSETS.heroPosterUrl) heroPoster.src = ASSETS.heroPosterUrl;
+
+  // Financing image (Block 2 image panel)
+  const financeImg = document.querySelector('[data-asset="financing-image"]');
+  if (financeImg && ASSETS.financingImageUrl) financeImg.src = ASSETS.financingImageUrl;
+
+  // Solar explainer inline video
+  const explainerVideo = document.querySelector('[data-asset="solar-explainer-video"]');
+  const explainerPoster = document.querySelector('[data-asset="solar-explainer-poster"]');
+  if (explainerVideo && ASSETS.solarExplainerVideoUrl) explainerVideo.src = ASSETS.solarExplainerVideoUrl;
+  if (explainerPoster && ASSETS.solarExplainerPosterUrl) explainerPoster.src = ASSETS.solarExplainerPosterUrl;
+
+  // Why go solar image (alternating media)
+  const whyImg = document.querySelector('[data-asset="why-go-solar"]');
+  if (whyImg && ASSETS.whyGoSolarImageUrl) whyImg.src = ASSETS.whyGoSolarImageUrl;
+
+  // Projects strip video
+  const projectsVideo = document.querySelector('[data-asset="projects-strip-video"]');
+  const projectsPoster = document.querySelector('[data-asset="projects-strip-poster"]');
+  if (projectsVideo && ASSETS.projectsStripVideoUrl) projectsVideo.src = ASSETS.projectsStripVideoUrl;
+  if (projectsPoster && ASSETS.projectsStripPosterUrl) projectsPoster.src = ASSETS.projectsStripPosterUrl;
+
+  // Optional side images
+  const savingsImg = document.querySelector('[data-asset="savings-image"]');
+  if (savingsImg && ASSETS.savingsSideImageUrl) savingsImg.src = ASSETS.savingsSideImageUrl;
+
+  const processImg = document.querySelector('[data-asset="process-image"]');
+  if (processImg && ASSETS.processImageUrl) processImg.src = ASSETS.processImageUrl;
+}
+
+// Run once DOM is ready
+document.addEventListener("DOMContentLoaded", bindAssets);
+
+function setupExplainerAudio() {
+  const video = document.querySelector('[data-asset="solar-explainer-video"]');
+  const btn = document.querySelector('[data-action="toggle-explainer-audio"]');
+  const chip = document.querySelector('[data-ui="sound-chip"]');
+  if (!video || !btn) return;
+
+  // Autoplay rules: must start muted
+  video.muted = true;
+  video.playsInline = true;
+
+  const updateBtn = () => {
+    btn.textContent = video.muted ? "Unmute" : "Mute";
+    btn.setAttribute("aria-pressed", String(!video.muted));
+  };
+
+  btn.addEventListener("click", async () => {
+    // Some browsers require play() after user gesture
+    try {
+      await video.play();
+    } catch (error) {
+      // no-op
+    }
+    video.muted = !video.muted;
+    updateBtn();
+
+    if (!video.muted && chip) {
+      chip.classList.add("show");
+      setTimeout(() => chip.classList.remove("show"), 1800);
+    }
+  });
+
+  updateBtn();
+}
+
+document.addEventListener("DOMContentLoaded", setupExplainerAudio);
 
 const state = {
   gallery: [],
@@ -22,29 +119,6 @@ const state = {
 };
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-const applyAssets = () => {
-  document.querySelectorAll("[data-asset]").forEach((el) => {
-    const key = el.dataset.asset;
-    const url = ASSETS[key];
-    if (!url) return;
-    if (el.tagName.toLowerCase() === "img") {
-      el.src = url;
-    } else if (el.tagName.toLowerCase() === "video") {
-      el.src = url;
-      el.load();
-    } else {
-      el.style.backgroundImage = `url(${url})`;
-    }
-  });
-
-  document.querySelectorAll("[data-poster]").forEach((el) => {
-    const key = el.dataset.poster;
-    const url = ASSETS[key];
-    if (!url) return;
-    el.setAttribute("poster", url);
-  });
-};
 
 const utmParams = () => {
   const params = new URLSearchParams(window.location.search);
@@ -276,36 +350,6 @@ const initLocation = () => {
   document.getElementById("town-input").addEventListener("input", update);
 };
 
-const initAudioToggle = () => {
-  const video = document.querySelector(".system__video");
-  const button = document.querySelector("[data-audio-toggle]");
-  const chip = document.querySelector(".sound-chip");
-  if (!video || !button) return;
-  let chipTimer = null;
-  const update = () => {
-    const muted = video.muted;
-    button.textContent = muted ? "Sound off" : "Sound on";
-    button.setAttribute("aria-pressed", String(!muted));
-  };
-  const showChip = () => {
-    if (!chip) return;
-    chip.classList.add("active");
-    if (chipTimer) window.clearTimeout(chipTimer);
-    chipTimer = window.setTimeout(() => chip.classList.remove("active"), 2000);
-  };
-  button.addEventListener("click", () => {
-    video.muted = !video.muted;
-    update();
-    if (!video.muted) {
-      video.play().catch(() => {});
-      showChip();
-    } else if (chip) {
-      chip.classList.remove("active");
-    }
-  });
-  update();
-};
-
 let lastFocusedElement = null;
 
 const trapFocus = (modal) => {
@@ -474,14 +518,12 @@ const init = async () => {
   } catch (error) {
     state.config = {};
   }
-  applyAssets();
   setWaLinks();
   initTyping();
   initReveal();
   initAccordion();
   initDiagram();
   initSavings();
-  initAudioToggle();
   initLocation();
   initModal();
   initLightbox();
