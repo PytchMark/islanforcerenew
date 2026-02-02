@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Island Force Renewables | Solar Power Movement</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <header class="nav">
+      <div class="nav__brand">
+        <span class="nav__logo">IFR</span>
+        <div>
+          <p class="nav__title">Island Force Renewables</p>
+          <p class="nav__subtitle">Solar Power Movement</p>
+        </div>
+      </div>
+      <nav class="nav__links">
+        <a href="#financing">Financing</a>
+        <a href="#savings">Savings</a>
+        <a href="#projects">Projects</a>
+        <a href="#process">Process</a>
+      </nav>
+      <a class="btn btn--primary" data-wa="hero-primary" href="#">Go Solar Now</a>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <video class="hero__video" autoplay muted loop playsinline data-video="hero" poster="/assets/img/hero-poster.svg"></video>
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <div class="hero__glass reveal">
+            <p class="eyebrow">Premium Solar Transformation</p>
+            <h1>Take Control of Your Power.</h1>
+            <p class="subhead">Plug Into the Sun.</p>
+            <div class="cta-group">
+              <a class="btn btn--primary" data-wa="hero-primary" href="#">Go Solar Now</a>
+              <a class="btn btn--ghost" data-wa="hero-secondary" href="#">Join the Movement</a>
+            </div>
+            <div class="trust-chips">
+              <span>Tier-1 Panels</span>
+              <span>Battery Ready</span>
+              <span>Island-Optimized Design</span>
+            </div>
+          </div>
+          <div class="hero__stats reveal">
+            <div class="stat-card">
+              <h3>30-50%</h3>
+              <p>Typical bill reduction</p>
+            </div>
+            <div class="stat-card">
+              <h3>24/7</h3>
+              <p>Monitoring &amp; support</p>
+            </div>
+            <div class="stat-card">
+              <h3>Custom</h3>
+              <p>Engineered for your roof</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="financing" id="financing">
+        <video class="section-video" autoplay muted loop playsinline data-video="financing" poster="/assets/img/financing-poster.svg"></video>
+        <div class="section-overlay"></div>
+        <div class="container">
+          <div class="financing__grid">
+            <div class="financing__text reveal">
+              <p class="eyebrow">Financing Reframe</p>
+              <h2>Let your bill build equity.</h2>
+              <p class="typing" id="typing-line"></p>
+              <p class="lock-line" id="lock-line">Solar doesn’t eliminate monthly payments. It changes what those payments do for you.</p>
+              <button class="btn btn--primary" data-modal-open="education">See the Difference</button>
+            </div>
+            <div class="financing__cards reveal">
+              <div class="card glass">
+                <h3>Same monthly outflow</h3>
+                <p>Replace rent-like utility payments with ownership building energy assets.</p>
+              </div>
+              <div class="card glass">
+                <h3>Protected from rate spikes</h3>
+                <p>Lock in predictable solar payments while utility prices rise.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="comparison" id="comparison">
+        <div class="container">
+          <h2 class="section-title reveal">Solar vs. Utility Renting</h2>
+          <div class="comparison__grid reveal">
+            <div class="card compare-card">
+              <h3>Renting Power</h3>
+              <ul>
+                <li>Payments reset every month</li>
+                <li>No equity or asset value</li>
+                <li>Exposed to utility rate hikes</li>
+              </ul>
+            </div>
+            <div class="card compare-card highlight">
+              <h3>Solar Ownership</h3>
+              <ul>
+                <li>Monthly payments build asset value</li>
+                <li>Backup-ready resilience</li>
+                <li>Designed for island conditions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="system" id="system">
+        <div class="container system__grid">
+          <div class="system__diagram reveal">
+            <p class="eyebrow">Solar isn’t magic</p>
+            <div class="diagram">
+              <div class="diagram__block" data-step="0">Panels</div>
+              <div class="diagram__arrow"></div>
+              <div class="diagram__block" data-step="1">Inverter</div>
+              <div class="diagram__arrow"></div>
+              <div class="diagram__block" data-step="2">Battery</div>
+              <div class="diagram__arrow"></div>
+              <div class="diagram__block" data-step="3">Monitoring</div>
+              <div class="diagram__arrow"></div>
+              <div class="diagram__block" data-step="4">Utility Backup</div>
+            </div>
+          </div>
+          <div class="system__content reveal">
+            <h2>Understand your energy ecosystem.</h2>
+            <p>
+              We design every system so the panels, inverter, storage, and monitoring work together. You always know where power
+              is flowing.
+            </p>
+            <div class="accordion">
+              <button class="accordion__trigger" aria-expanded="false">What happens during a blackout?</button>
+              <div class="accordion__content">
+                <p>Your battery and inverter keep essential circuits running, and we tune it to your priority loads.</p>
+              </div>
+            </div>
+            <div class="accordion">
+              <button class="accordion__trigger" aria-expanded="false">Can I expand later?</button>
+              <div class="accordion__content">
+                <p>Yes. We design for growth so you can add storage or panels without a full rebuild.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="savings" id="savings">
+        <div class="container">
+          <h2 class="section-title reveal">Estimate your savings potential.</h2>
+          <div class="savings__grid">
+            <div class="card savings__controls reveal">
+              <label for="bill-range">Monthly bill (JMD)</label>
+              <input id="bill-range" type="range" min="10000" max="200000" step="5000" value="45000" />
+              <div class="bill-display">JMD <span id="bill-value">45,000</span></div>
+              <div class="toggle">
+                <button class="toggle__btn active" data-plan="residential">Residential</button>
+                <button class="toggle__btn" data-plan="commercial">Commercial</button>
+              </div>
+              <a class="btn btn--primary" data-wa="savings-cta" href="#">Send My Bill on WhatsApp</a>
+            </div>
+            <div class="card savings__result reveal">
+              <h3>Estimated impact</h3>
+              <p class="savings__number">JMD <span id="savings-amount">18,000</span> / month</p>
+              <div class="band">
+                <div class="band__fill" id="savings-band"></div>
+              </div>
+              <p class="savings__note">Based on typical island solar offsets. We refine this with your actual bill.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="location" id="location">
+        <div class="container location__grid">
+          <div class="location__form card reveal">
+            <h2>Check eligibility in your area.</h2>
+            <label for="parish-select">Parish</label>
+            <select id="parish-select">
+              <option value="">Select parish</option>
+            </select>
+            <label for="town-input">Town (optional)</label>
+            <input id="town-input" type="text" placeholder="e.g. Montego Bay" />
+            <a class="btn btn--primary" data-wa="location-cta" href="#">Check My Area</a>
+          </div>
+          <div class="location__result card reveal" id="location-result">
+            <h3>We can design for you.</h3>
+            <p>We will confirm shading, roof angle, and grid availability with a quick site review.</p>
+            <div class="badge">Priority assessment window: 48 hours</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects" id="projects">
+        <div class="projects__video">
+          <video autoplay muted loop playsinline data-video="projects" poster="/assets/img/projects-poster.svg"></video>
+          <div class="section-overlay"></div>
+          <div class="container projects__header">
+            <h2>Solar installs across the island.</h2>
+            <p>Every photo is pulled from our live Cloudinary portfolio.</p>
+          </div>
+        </div>
+        <div class="container projects__content">
+          <div class="projects__featured reveal">
+            <h3>Featured install</h3>
+            <div id="featured-card" class="gallery-card"></div>
+          </div>
+          <div class="projects__recent reveal">
+            <h3>Recent installs</h3>
+            <div class="gallery-grid" id="recent-grid"></div>
+          </div>
+          <div class="projects__all reveal">
+            <h3>Full portfolio</h3>
+            <div class="gallery-grid" id="all-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="advisor" id="advisor">
+        <div class="container">
+          <div class="advisor__grid">
+            <div class="advisor__card card reveal">
+              <h2>Your solar advisor is a strategist.</h2>
+              <p>We align energy goals, roof realities, and financing to your lifestyle so the system pays off.</p>
+              <div class="icon-row">
+                <span>Design</span>
+                <span>Finance</span>
+                <span>Support</span>
+              </div>
+            </div>
+            <div class="advisor__list reveal">
+              <div class="card">
+                <h3>Financing pathways</h3>
+                <p>Loan, lease, or hybrid. We match your cash flow goals to the right structure.</p>
+              </div>
+              <div class="card">
+                <h3>Battery-first planning</h3>
+                <p>Be prepared for outages with storage models that fit your critical loads.</p>
+              </div>
+              <div class="card">
+                <h3>Energy dashboard</h3>
+                <p>Track performance, savings, and carbon impact from your phone.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="process" id="process">
+        <div class="container">
+          <h2 class="section-title reveal">A premium experience from audit to activation.</h2>
+          <div class="process__grid reveal">
+            <div class="card">
+              <h3>1. Discovery call</h3>
+              <p>We review your bill, goals, and property to align the right system size.</p>
+            </div>
+            <div class="card">
+              <h3>2. Site assessment</h3>
+              <p>Our engineers evaluate roof structure, shading, and grid connection details.</p>
+            </div>
+            <div class="card">
+              <h3>3. Design + finance</h3>
+              <p>We deliver a proposal with financing pathways and projected savings.</p>
+            </div>
+            <div class="card">
+              <h3>4. Install + optimize</h3>
+              <p>Certified installers commission your system and tune monitoring for peak output.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials" id="testimonials">
+        <div class="container">
+          <h2 class="section-title reveal">Island voices, real results.</h2>
+          <div class="testimonials__grid reveal">
+            <div class="card">
+              <p>“Our bill dropped in the first month, and the battery kept us powered during a storm.”</p>
+              <span>- St. Andrew homeowner</span>
+            </div>
+            <div class="card">
+              <p>“The team made financing simple. We redirected our utility spend into an asset.”</p>
+              <span>- Kingston business owner</span>
+            </div>
+            <div class="card">
+              <p>“Clear updates, clean install, and the monitoring app keeps us confident.”</p>
+              <span>- Negril resort manager</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta" id="final-cta">
+        <div class="container final-cta__content reveal">
+          <h2>Design My Solar Options</h2>
+          <p>Tell us about your roof, energy goals, and timeline. We’ll reply with a tailored plan.</p>
+          <a class="btn btn--primary" data-wa="final-cta" href="#">Design My Solar Options</a>
+        </div>
+      </section>
+    </main>
+
+    <div class="cta-bar">
+      <a class="btn btn--primary" data-wa="mobile-cta" href="#">Go Solar Now</a>
+    </div>
+
+    <div class="modal" id="education-modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal__content" role="document">
+        <button class="modal__close" data-modal-close aria-label="Close">&times;</button>
+        <h2>What your bill is really doing.</h2>
+        <div class="modal__grid">
+          <div class="card">
+            <h3>Utility rent</h3>
+            <p>Monthly payments reset. No asset. No resilience.</p>
+          </div>
+          <div class="card">
+            <h3>Solar ownership</h3>
+            <p>Payments build system value and protect you from rate spikes.</p>
+          </div>
+          <div class="card">
+            <h3>Action step</h3>
+            <p>Send a recent bill and we’ll design a plan within 48 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal__content modal__content--wide" role="document">
+        <button class="modal__close" data-modal-close aria-label="Close">&times;</button>
+        <button class="lightbox__nav lightbox__nav--prev" data-lightbox-prev aria-label="Previous">&#10094;</button>
+        <div class="lightbox__media" id="lightbox-media"></div>
+        <button class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Next">&#10095;</button>
+        <p class="lightbox__caption" id="lightbox-caption"></p>
+      </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
