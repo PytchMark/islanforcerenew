@@ -29,24 +29,6 @@ Create a `.env` file locally (see `.env.example`) and configure:
 - `PROJECTS_VIDEO_URL`
 - `PROJECTS_POSTER_URL`
 
-## Frontend asset map
-
-Update these in `public/js/app.js` under the `ASSETS` constant. You can point to Cloudinary/remote URLs or store local files in `/public/assets`.
-
-| ASSETS key | Purpose | Suggested local file |
-| --- | --- | --- |
-| `logoUrl` | Navbar logo image | `/public/assets/img/logo.png` |
-| `heroBgVideoUrl` | Hero background video | `/public/assets/video/hero.mp4` |
-| `heroPosterUrl` | Hero video poster image | `/public/assets/img/hero-poster.jpg` |
-| `financingImageUrl` | Financing section image panel | `/public/assets/img/financing.jpg` |
-| `solarExplainerVideoUrl` | Solar explainer inline video | `/public/assets/video/solar-explainer.mp4` |
-| `solarExplainerPosterUrl` | Solar explainer poster | `/public/assets/img/solar-explainer.jpg` |
-| `whyGoSolarImageUrl` | Comparison/advisor image panel | `/public/assets/img/why-go-solar.jpg` |
-| `savingsSideImageUrl` | Savings side image | `/public/assets/img/savings.jpg` |
-| `processImageUrl` | Process section image | `/public/assets/img/process.jpg` |
-| `projectsStripVideoUrl` | Projects header strip video | `/public/assets/video/projects.mp4` |
-| `projectsStripPosterUrl` | Projects strip poster | `/public/assets/img/projects-poster.jpg` |
-
 ### Video backgrounds
 
 If any of the `*_VIDEO_URL` values are unset, the frontend falls back to `/public/assets/video/*.mp4`. Replace these placeholder files with your preferred videos.

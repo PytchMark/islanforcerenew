@@ -1,19 +1,3 @@
-const ASSETS = {
-  logoUrl: "https://res.cloudinary.com/dd8pjjxsm/image/upload/v1770020328/ChatGPT_Image_Jan_20_2026_11_48_57_AM_ibqw3k.png",
-  heroBgVideoUrl: "/assets/video/hero.mp4",
-  heroPosterUrl: "/assets/img/hero-poster.svg",
-  financingImageUrl: "/assets/img/financing-poster.svg",
-  solarExplainerVideoUrl:
-    "https://res.cloudinary.com/dd8pjjxsm/video/upload/v1770020838/From_KlickPin_CF_Operation_process_of_energy-saving_solar_energy_system_batteryenergystoragesystem_Video___Solar_energy_projects_Solar_energy_system_Solar_power_calculator_vwxk7s.mp4",
-  solarExplainerPosterUrl: "/assets/img/projects-poster.svg",
-  whyGoSolarImageUrl:
-    "https://res.cloudinary.com/dd8pjjxsm/image/upload/v1770020328/ChatGPT_Image_Jan_20_2026_09_58_37_AM_clnnrw.png",
-  savingsSideImageUrl: "/assets/img/hero-poster.svg",
-  processImageUrl: "/assets/img/projects-poster.svg",
-  projectsStripVideoUrl: "/assets/video/projects.mp4",
-  projectsStripPosterUrl: "/assets/img/projects-poster.svg",
-};
-
 const state = {
   gallery: [],
   lightboxIndex: 0,
@@ -398,62 +382,27 @@ const initGallery = async () => {
   }
 };
 
-const initAssetBindings = (config) => {
-  const resolved = {
-    ...ASSETS,
-    heroBgVideoUrl: config.heroVideoUrl || ASSETS.heroBgVideoUrl,
-    heroPosterUrl: config.heroPosterUrl || ASSETS.heroPosterUrl,
-    projectsStripVideoUrl: config.projectsVideoUrl || ASSETS.projectsStripVideoUrl,
-    projectsStripPosterUrl: config.projectsPosterUrl || ASSETS.projectsStripPosterUrl,
+const initVideoSources = (config) => {
+  const mappings = {
+    hero: {
+      src: config.heroVideoUrl || "/assets/video/hero.mp4",
+      poster: config.heroPosterUrl || "/assets/img/hero-poster.svg",
+    },
+    financing: {
+      src: config.financingVideoUrl || "/assets/video/financing.mp4",
+      poster: config.financingPosterUrl || "/assets/img/financing-poster.svg",
+    },
+    projects: {
+      src: config.projectsVideoUrl || "/assets/video/projects.mp4",
+      poster: config.projectsPosterUrl || "/assets/img/projects-poster.svg",
+    },
   };
 
-  document.querySelectorAll("[data-asset]").forEach((el) => {
-    const key = el.dataset.asset;
-    const value = resolved[key];
-    if (!value) return;
-    if (el.tagName === "IMG") {
-      el.src = value;
-    } else if (el.tagName === "VIDEO") {
-      el.src = value;
-    } else {
-      el.style.backgroundImage = `url('${value}')`;
-    }
-  });
-
-  const heroVideo = document.querySelector("video[data-video='hero']");
-  if (heroVideo) {
-    heroVideo.src = resolved.heroBgVideoUrl;
-    heroVideo.poster = resolved.heroPosterUrl;
-  }
-
-  const projectsVideo = document.querySelector("video[data-video='projects']");
-  if (projectsVideo) {
-    projectsVideo.src = resolved.projectsStripVideoUrl;
-    projectsVideo.poster = resolved.projectsStripPosterUrl;
-  }
-
-  const explainerVideo = document.querySelector("[data-asset='solarExplainerVideoUrl']");
-  if (explainerVideo) {
-    explainerVideo.poster = resolved.solarExplainerPosterUrl;
-  }
-};
-
-const initMuteToggle = () => {
-  const video = document.querySelector("[data-asset='solarExplainerVideoUrl']");
-  const toggle = document.querySelector("[data-mute-toggle]");
-  const label = document.querySelector("[data-mute-label]");
-  const chip = document.querySelector("[data-sound-chip]");
-  if (!video || !toggle) return;
-
-  toggle.addEventListener("click", () => {
-    video.muted = !video.muted;
-    if (label) {
-      label.textContent = video.muted ? "Sound off" : "Sound on";
-    }
-    if (!video.muted && chip) {
-      chip.classList.add("show");
-      setTimeout(() => chip.classList.remove("show"), 1200);
-    }
+  document.querySelectorAll("video[data-video]").forEach((video) => {
+    const key = video.dataset.video;
+    if (!mappings[key]) return;
+    video.src = mappings[key].src;
+    video.poster = mappings[key].poster;
   });
 };
 
@@ -464,7 +413,7 @@ const init = async () => {
   } catch (error) {
     state.config = {};
   }
-  initAssetBindings(state.config);
+  initVideoSources(state.config);
   setWaLinks();
   initTyping();
   initReveal();
@@ -474,7 +423,6 @@ const init = async () => {
   initLocation();
   initModal();
   initLightbox();
-  initMuteToggle();
   initGallery();
   updateDynamicLinks();
 };
