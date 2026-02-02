@@ -1,3 +1,20 @@
+const ASSETS = {
+  logoUrl:
+    "https://res.cloudinary.com/dd8pjjxsm/image/upload/v1770020328/ChatGPT_Image_Jan_20_2026_11_48_57_AM_ibqw3k.png",
+  heroBgVideoUrl: "/assets/video/hero.mp4",
+  heroPosterUrl: "/assets/img/hero-poster.svg",
+  financingImageUrl: "/assets/img/financing-poster.svg",
+  solarExplainerVideoUrl:
+    "https://res.cloudinary.com/dd8pjjxsm/video/upload/v1770020838/From_KlickPin_CF_Operation_process_of_energy-saving_solar_energy_system_batteryenergystoragesystem_Video___Solar_energy_projects_Solar_energy_system_Solar_power_calculator_vwxk7s.mp4",
+  solarExplainerPosterUrl: "/assets/img/hero-poster.svg",
+  whyGoSolarImageUrl:
+    "https://res.cloudinary.com/dd8pjjxsm/image/upload/v1770020328/ChatGPT_Image_Jan_20_2026_09_58_37_AM_clnnrw.png",
+  savingsSideImageUrl: "/assets/img/hero-poster.svg",
+  processImageUrl: "/assets/img/projects-poster.svg",
+  projectsStripVideoUrl: "/assets/video/projects.mp4",
+  projectsStripPosterUrl: "/assets/img/projects-poster.svg",
+};
+
 const state = {
   gallery: [],
   lightboxIndex: 0,
@@ -5,6 +22,29 @@ const state = {
 };
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const applyAssets = () => {
+  document.querySelectorAll("[data-asset]").forEach((el) => {
+    const key = el.dataset.asset;
+    const url = ASSETS[key];
+    if (!url) return;
+    if (el.tagName.toLowerCase() === "img") {
+      el.src = url;
+    } else if (el.tagName.toLowerCase() === "video") {
+      el.src = url;
+      el.load();
+    } else {
+      el.style.backgroundImage = `url(${url})`;
+    }
+  });
+
+  document.querySelectorAll("[data-poster]").forEach((el) => {
+    const key = el.dataset.poster;
+    const url = ASSETS[key];
+    if (!url) return;
+    el.setAttribute("poster", url);
+  });
+};
 
 const utmParams = () => {
   const params = new URLSearchParams(window.location.search);
@@ -31,7 +71,8 @@ const setWaLinks = () => {
     "hero-primary": "Hi Island Force Renewables! I'm ready to go solar. Please share next steps.",
     "hero-secondary": "Hi Island Force Renewables! I'd like to join the Solar Power Movement.",
     "mobile-cta": "Hi Island Force Renewables! I'm ready to go solar. Please share next steps.",
-    "savings-cta": "Hi Island Force Renewables! My bill is JMD {bill} ({type}). Please design options and I'll attach my bill.",
+    "savings-cta":
+      "Hi Island Force Renewables! My bill is JMD {bill} ({type}). I'm sending my bill photo so you can size my system.",
     "location-cta": "Hi Island Force Renewables! I'm located in {parish}, {town}. Can you confirm eligibility?",
     "final-cta":
       "Hi Island Force Renewables! I'd like a solar design. Roof type: ____. Average bill: ____. Timeline: ____.",
@@ -48,7 +89,8 @@ const setWaLinks = () => {
 
 const updateDynamicLinks = () => {
   const bill = document.getElementById("bill-value").textContent.replace(/,/g, "");
-  const type = document.querySelector(".toggle__btn.active")?.dataset.plan || "residential";
+  const plan = document.querySelector(".toggle__btn.active")?.dataset.plan || "residential";
+  const type = plan === "commercial" ? "Commercial" : "Residential";
   const savingsLink = document.querySelector('[data-wa="savings-cta"]');
   if (savingsLink?.dataset.waTemplate) {
     const message = savingsLink.dataset.waTemplate
@@ -73,11 +115,14 @@ const initTyping = () => {
     "You already pay monthly for electricity…",
     "What if your electricity bill built something?",
     "Most people rent power without realizing it.",
-    "Stop renting power.",
   ];
   const typingEl = document.getElementById("typing-line");
-  if (!typingEl || prefersReducedMotion) {
-    typingEl.textContent = lines.at(-1);
+  const lockLine = document.getElementById("lock-line");
+  if (!typingEl || !lockLine) return;
+  lockLine.classList.remove("active");
+  if (prefersReducedMotion) {
+    typingEl.textContent = "";
+    lockLine.classList.add("active");
     return;
   }
   let lineIndex = 0;
@@ -85,6 +130,11 @@ const initTyping = () => {
   let deleting = false;
 
   const tick = () => {
+    if (lineIndex >= lines.length) {
+      typingEl.textContent = "";
+      lockLine.classList.add("active");
+      return;
+    }
     const line = lines[lineIndex];
     if (!deleting) {
       typingEl.textContent = line.slice(0, charIndex + 1);
@@ -99,7 +149,7 @@ const initTyping = () => {
       charIndex -= 1;
       if (charIndex === 0) {
         deleting = false;
-        lineIndex = (lineIndex + 1) % lines.length;
+        lineIndex += 1;
       }
     }
     setTimeout(tick, deleting ? 40 : 70);
@@ -136,7 +186,7 @@ const initAccordion = () => {
 };
 
 const initDiagram = () => {
-  const blocks = document.querySelectorAll(".diagram__block");
+  const blocks = document.querySelectorAll(".diagram__step");
   if (!blocks.length) return;
   const activate = () => {
     blocks.forEach((block, index) => {
@@ -162,16 +212,21 @@ const initSavings = () => {
   const valueEl = document.getElementById("bill-value");
   const savingsEl = document.getElementById("savings-amount");
   const band = document.getElementById("savings-band");
+  const summary = document.getElementById("savings-summary");
   const toggleButtons = document.querySelectorAll(".toggle__btn");
 
   const calculate = () => {
     const bill = Number(range.value);
     valueEl.textContent = bill.toLocaleString();
     const plan = document.querySelector(".toggle__btn.active")?.dataset.plan || "residential";
+    const planLabel = plan === "commercial" ? "commercial" : "residential";
     const rate = plan === "commercial" ? 0.5 : 0.4;
     const savings = Math.round(bill * rate);
     savingsEl.textContent = savings.toLocaleString();
     band.style.width = `${rate * 100}%`;
+    if (summary) {
+      summary.textContent = `Based on a JMD ${bill.toLocaleString()} ${planLabel} bill, your estimated savings shift.`;
+    }
     updateDynamicLinks();
   };
 
@@ -219,6 +274,36 @@ const initLocation = () => {
   };
   select.addEventListener("change", update);
   document.getElementById("town-input").addEventListener("input", update);
+};
+
+const initAudioToggle = () => {
+  const video = document.querySelector(".system__video");
+  const button = document.querySelector("[data-audio-toggle]");
+  const chip = document.querySelector(".sound-chip");
+  if (!video || !button) return;
+  let chipTimer = null;
+  const update = () => {
+    const muted = video.muted;
+    button.textContent = muted ? "Sound off" : "Sound on";
+    button.setAttribute("aria-pressed", String(!muted));
+  };
+  const showChip = () => {
+    if (!chip) return;
+    chip.classList.add("active");
+    if (chipTimer) window.clearTimeout(chipTimer);
+    chipTimer = window.setTimeout(() => chip.classList.remove("active"), 2000);
+  };
+  button.addEventListener("click", () => {
+    video.muted = !video.muted;
+    update();
+    if (!video.muted) {
+      video.play().catch(() => {});
+      showChip();
+    } else if (chip) {
+      chip.classList.remove("active");
+    }
+  });
+  update();
 };
 
 let lastFocusedElement = null;
@@ -382,30 +467,6 @@ const initGallery = async () => {
   }
 };
 
-const initVideoSources = (config) => {
-  const mappings = {
-    hero: {
-      src: config.heroVideoUrl || "/assets/video/hero.mp4",
-      poster: config.heroPosterUrl || "/assets/img/hero-poster.svg",
-    },
-    financing: {
-      src: config.financingVideoUrl || "/assets/video/financing.mp4",
-      poster: config.financingPosterUrl || "/assets/img/financing-poster.svg",
-    },
-    projects: {
-      src: config.projectsVideoUrl || "/assets/video/projects.mp4",
-      poster: config.projectsPosterUrl || "/assets/img/projects-poster.svg",
-    },
-  };
-
-  document.querySelectorAll("video[data-video]").forEach((video) => {
-    const key = video.dataset.video;
-    if (!mappings[key]) return;
-    video.src = mappings[key].src;
-    video.poster = mappings[key].poster;
-  });
-};
-
 const init = async () => {
   try {
     const response = await fetch("/api/config");
@@ -413,13 +474,14 @@ const init = async () => {
   } catch (error) {
     state.config = {};
   }
-  initVideoSources(state.config);
+  applyAssets();
   setWaLinks();
   initTyping();
   initReveal();
   initAccordion();
   initDiagram();
   initSavings();
+  initAudioToggle();
   initLocation();
   initModal();
   initLightbox();
